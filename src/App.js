@@ -8,6 +8,7 @@ import {
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
+import NoteState from './context/notes/NoteState';
 
 
 function App() {
@@ -27,17 +28,19 @@ function App() {
 
   return (
     <>
+      <NoteState>
         <Router>
           <Navbar title = "iNotebook" mode = {mode} toggleMode = {toggleMode} />
           <Switch>
-            <Route path = "/">
+            <Route exact path = "/">
               <Home/>
             </Route>
             <Route exact path = "/about">
-              <About />
+              <About/>
             </Route>
           </Switch>
         </Router>
+      </NoteState>
     </>
     
   );
