@@ -1,13 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
+import { useContext } from "react";
+import modeContext from "../context/mode/modeContext"
 
 // accepting props in here
 export default function Navbar(props) {
+
+  const context = useContext(modeContext);
+  const {mode, toggleMode} = context;
+
+  const location = useLocation();
+  
   return (
     <div>
 
-    <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+    <nav className={`navbar navbar-expand-lg navbar-${mode} bg-${mode}`}>
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           {props.title}
@@ -26,22 +34,22 @@ export default function Navbar(props) {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav  me-auto">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">
+            <li className="nav-item">
+              <Link className={`nav-link ${location.pathname === '/' ? "active" : ""}`} to="/">
                 Home 
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">
+              <Link className={`nav-link ${location.pathname === '/about' ? "active" : ""}`} to="/about">
                 {props.aboutText}
               </Link>
             </li>
           </ul>
           <form className="form-inline d-flex ">
-            <div className={`form-check form-switch text-${(props.mode === 'light') ? 'dark' : 'light'}`}>
+            <div className={`form-check form-switch text-${(mode === 'light') ? 'dark' : 'light'}`}>
               <input
                 className="form-check-input"
-                onClick = {props.toggleMode}
+                onClick = {toggleMode}
                 type="checkbox"
                 id="flexSwitchCheckDefault"
               />

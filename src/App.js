@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,37 +9,34 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
 import NoteState from './context/notes/NoteState';
+import Alert from './components/Alert';
+import AlertState from './context/alerts/AlertState';
+import ModeState from './context/mode/ModeState';
 
 
 function App() {
-  const [mode, setMode] = useState("light")
-
-  const toggleMode = ()=>{
-    if (mode === "light") {
-      setMode("dark");
-      document.body.style.backgroundColor = "#464343";
-     
-    } else {
-      setMode("light");
-      document.body.style.backgroundColor = "white";
-     
-    }
-  };
 
   return (
     <>
       <NoteState>
-        <Router>
-          <Navbar title = "iNotebook" mode = {mode} toggleMode = {toggleMode} />
-          <Switch>
-            <Route exact path = "/">
-              <Home/>
-            </Route>
-            <Route exact path = "/about">
-              <About/>
-            </Route>
-          </Switch>
-        </Router>
+        <AlertState>
+          <ModeState>
+            <Router>
+              <Navbar title = "iNotebook"/>
+              <Alert />
+              <div className="container">
+              <Switch>
+                <Route exact path = "/">
+                  <Home/>
+                </Route>
+                <Route exact path = "/about">
+                  <About/>
+                </Route>
+              </Switch>
+              </div>
+            </Router>
+          </ModeState>
+        </AlertState>
       </NoteState>
     </>
     
