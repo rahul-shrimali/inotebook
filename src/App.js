@@ -12,6 +12,8 @@ import NoteState from './context/notes/NoteState';
 import Alert from './components/Alert';
 import AlertState from './context/alerts/AlertState';
 import ModeState from './context/mode/ModeState';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 
 function App() {
@@ -27,10 +29,16 @@ function App() {
               <div className="container">
               <Switch>
                 <Route exact path = "/">
-                  <Home/>
+                  <Home/> 
                 </Route>
                 <Route exact path = "/about">
                   <About/>
+                </Route>
+                <Route exact path = "/login">
+                  <Login></Login>
+                </Route>
+                <Route exact path = "/signUp">
+                  <SignUp></SignUp>
                 </Route>
               </Switch>
               </div>

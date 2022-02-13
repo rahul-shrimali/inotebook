@@ -46,6 +46,9 @@ export default function Navbar(props) {
             </li>
           </ul>
           <form className="form-inline d-flex ">
+            <Link role="button" to="/login" className="btn btn-primary mx-2" type="submit">Login</Link>
+            <Link role="button" to="/signUp" className="btn btn-primary mx-2" type="submit">Sign Up</Link>
+            
             <div className={`form-check form-switch text-${(mode === 'light') ? 'dark' : 'light'}`}>
               <input
                 className="form-check-input"
