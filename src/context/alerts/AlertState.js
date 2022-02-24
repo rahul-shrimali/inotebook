@@ -1,16 +1,18 @@
 import alertContext from "./alertContext";
 import { useState } from "react";
+import Alert from "../../components/Alert";
 
 const AlertState = (props)=>{
-    const [alert, setAlert] = useState("here");
+    const [alert, setAlert] = useState({message :"", type : ""});
     const showAlert = (message, type)=>{
         setAlert({
-            msg : message,
+            message : message,
             type : type
         });
+       
         setTimeout(() => {
-            setAlert(null);
-        }, 1500);
+            setAlert(null)
+        }, 2000);
     }
 
     return(

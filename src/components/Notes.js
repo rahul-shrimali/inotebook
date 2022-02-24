@@ -4,11 +4,14 @@ import noteContext from '../context/notes/noteContext';
 import AddNote from './AddNote';
 import modeContext from "../context/mode/modeContext";
 import NoteItem from './NoteItem';
+import alertContext from '../context/alerts/alertContext';
 
 
 const Notes = () => {
     const context = useContext(noteContext);
     const context2 = useContext(modeContext);
+    const c3 = useContext(alertContext)
+    const {showAlert} = c3
     const { mode } = context2;
     const { notes, getNotes, editNote } = context;
 
@@ -28,11 +31,14 @@ const Notes = () => {
     const ref = useRef(null);
 
     const updateNote = (currnote) => {
-        // console.log(ref.current);
         ref.current.click()
         setNote({ id: currnote._id, etitle: currnote.title, edescription: currnote.description, etag: currnote.tag });
     }
 
+    const update = ()=>{
+        editNote(note.id, note.etitle, note.edescription, note.etag)
+        showAlert("Note updated", "info")
+    }
     return (
         <div className={`container text-${(mode === 'light') ? 'dark' : 'light'}`}>
             <AddNote mode = {mode}/>
@@ -70,7 +76,7 @@ const Notes = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" disabled={note.etitle.length <= 5 || note.edescription.length <= 5} className={`btn btn-${(mode === 'light') ? 'dark' : 'light'}`} data-bs-dismiss="modal" onClick={() => { editNote(note.id, note.etitle, note.edescription, note.etag) }}>Update Note</button>
+                            <button type="button" disabled={note.etitle.length <= 5 || note.edescription.length <= 5} className={`btn btn-${(mode === 'light') ? 'dark' : 'light'}`} data-bs-dismiss="modal" onClick={update}>Update Note</button>
                         </div>
                     </div>
                 </div>

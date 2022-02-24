@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import alertContext from '../context/alerts/alertContext';
 
 const SignUp = () => {
 
+  const context = useContext(alertContext)
+
+  const{showAlert} = context;
   let history = useHistory();
   const [user, setuser] = useState({name : "", email : "", password : "", cpassword :""})
 
@@ -16,7 +20,7 @@ const SignUp = () => {
       const url = "http://localhost:5000/api/auth/createUser"
       const {name, email, password, cpassword} = user 
       if(password !== cpassword){
-          alert("Password must be same")
+          showAlert("Password must be same", "warning")
           return
       }
       const response = await fetch(url,{
@@ -31,8 +35,9 @@ const SignUp = () => {
       if(json.success){
         localStorage.setItem('token', json.authtoken)
         history.push("/")
+        showAlert("Sign up Successfull", "success")
       }else{
-        alert("Invalid credentials ")
+        showAlert("Invalid Credentials", "danger")
       }
   }
   return (
