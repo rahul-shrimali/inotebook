@@ -7,6 +7,7 @@ const Login = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault();
         const url = "http://localhost:5000/api/auth/login"
+        console.log(JSON.stringify({email: cred.email, password:cred.password }));
         const response = await fetch(url,{
             method : 'POST',
             headers :{
