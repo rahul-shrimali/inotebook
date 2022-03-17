@@ -1,6 +1,5 @@
 import alertContext from "./alertContext";
 import { useState } from "react";
-import Alert from "../../components/Alert";
 
 const AlertState = (props)=>{
     const [alert, setAlert] = useState({message :"", type : ""});

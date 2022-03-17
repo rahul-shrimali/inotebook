@@ -22,7 +22,7 @@ const Login = () => {
         const json = await response.json()
         console.log(json);
         if(json.success){
-            localStorage.setItem('token', json.authtoken)
+            localStorage.setItem('token', json.authToken)
             showAlert("Login successful", "success")
             history.push("/");
 
@@ -35,19 +35,23 @@ const Login = () => {
       setCred({ ...cred, [e.target.name]: e.target.value })
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp" value={cred.email} onChange={handleChange}/>
-                <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" id="password" value={cred.password} onChange={handleChange} name='password' />
-            </div>
-            
-            <button type="submit" className="btn btn-primary" >Submit</button>
-        </form>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp" value={cred.email} onChange={handleChange}/>
+                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <input type="password" className="form-control" id="password" value={cred.password} onChange={handleChange} name='password' />
+                </div>
+                
+                <button type="submit" className="btn btn-primary" >Submit</button>
+            </form>
+
+        </div>
+        
     )
 };
 

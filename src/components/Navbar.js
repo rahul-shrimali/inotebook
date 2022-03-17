@@ -12,6 +12,10 @@ export default function Navbar(props) {
 
   const location = useLocation();
   
+  const logOut = ()=>{
+      localStorage.removeItem('token')
+  }
+
   return (
     <div>
 
@@ -46,8 +50,13 @@ export default function Navbar(props) {
             </li>
           </ul>
           <form className="form-inline d-flex ">
+           {!localStorage.getItem('token') ? <div>
             <Link role="button" to="/login" className="btn btn-primary mx-2" type="submit">Login</Link>
             <Link role="button" to="/signUp" className="btn btn-primary mx-2" type="submit">Sign Up</Link>
+            </div> : 
+              <button className="btn btn-primary mx-2" onClick={logOut}>Log Out</button>
+            }
+            
             
             <div className={`form-check form-switch text-${(mode === 'light') ? 'dark' : 'light'}`}>
               <input

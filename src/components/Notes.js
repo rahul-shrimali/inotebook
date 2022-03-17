@@ -5,6 +5,7 @@ import AddNote from './AddNote';
 import modeContext from "../context/mode/modeContext";
 import NoteItem from './NoteItem';
 import alertContext from '../context/alerts/alertContext';
+import { useHistory } from 'react-router-dom';
 
 
 const Notes = () => {
@@ -15,6 +16,7 @@ const Notes = () => {
     const { mode } = context2;
     const { notes, getNotes, editNote } = context;
 
+    let history = useHistory();
 
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "default" });
 
@@ -24,7 +26,12 @@ const Notes = () => {
     }
 
     useEffect(() => {
-        getNotes();
+        if(localStorage.getItem('token')){
+
+            getNotes();
+        }else{
+            history.push('/login');
+        }
         // eslint-disable-next-line 
     }, [])
 
@@ -87,7 +94,7 @@ const Notes = () => {
 
                 <h3 >Your Notes</h3>
                 <div className='container my-2 mr-3' >{notes.length === 0 && "No notes to show"}</div>
-                {notes.map((note, alert, showAlert) => {
+                {notes.length && notes.map((note, alert, showAlert) => {
                     return <NoteItem note={note} key={note._id} mode={mode} updateNote={updateNote} />
                 })}
             </div>
