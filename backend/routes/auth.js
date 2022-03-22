@@ -54,7 +54,7 @@ router.post('/createUser', [
         res.status(500).send("Internal server occured"); 
     }
 
-})
+})  
 
 //Route 2 Authenticate a User using : POST "/api/auth/login". No login required
 router.post('/login', [
@@ -73,7 +73,7 @@ router.post('/login', [
      try{
         let user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({success, error : 'Please enter correct credentials'});
+            return res.status(400).json({success, error : 'Please enter correct credentials'})
         }
 
         const passwordCompare = await bcrypt.compare(password, user.password);
